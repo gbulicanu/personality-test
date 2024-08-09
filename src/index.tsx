@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './bootstrap.scss';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
-import './index.css';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
