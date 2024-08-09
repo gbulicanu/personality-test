@@ -1,18 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
 import './bootstrap.scss';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 import './index.scss';
+
 import Landing from './Landing';
+import Questions from './Questions';
+import Finish from './Finish';
+
 import reportWebVitals from './reportWebVitals';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Landing />
+  },
+  {
+    path: "/questions",
+    element: <Questions />
+  },
+  {
+    path: "/finish",
+    element: <Finish />
+  },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Landing />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
