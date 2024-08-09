@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import Landing from './Landing';
 
 test('renders start personality test button', () => {
-  render(<App />);
+  render(<Landing />);
   const linkElement = screen.getByText(/start personality test/i);
   expect(linkElement).toBeInTheDocument();
 });

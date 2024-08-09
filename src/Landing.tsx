@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import './App.scss';
+import './Landing.scss';
 
-function App() {
+function Landing() {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default Landing;

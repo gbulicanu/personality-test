@@ -4,7 +4,7 @@ import './bootstrap.scss';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 import './index.scss';
-import App from './App';
+import Landing from './Landing';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Landing />
   </React.StrictMode>
 );
 
