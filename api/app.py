@@ -6,12 +6,12 @@ from questions import QUESTIONS
 app = Flask(__name__)
 
 
-@app.route('/time')
+@app.route('/api/time')
 def get_current_time():
     return {'time': time.time()}
 
 
-@app.route('/questions')
+@app.route('/api/questions')
 def get_all_questions():
     # get all questions
     questions = []
@@ -22,7 +22,7 @@ def get_all_questions():
     return questions
 
 
-@app.route('/questions/<int:question_id>')
+@app.route('/api/questions/<int:question_id>')
 def get_question(question_id):
     # get question with the given id
     return next((q for q in QUESTIONS if q['id'] == question_id), None) or {}, 404
