@@ -32,19 +32,25 @@ function Questions() {
                 {currentQuestionAnswers.map(answer => (
                     <li className='list-group-item' key={answer.option}>
                         <input
-                            className="form-check-input me-1"
+                            className="form-check-input me-1 hand"
                             type="radio"
                             name="listGroupRadio"
                             value=""
-                            id={'radio-' + answer.option} checked={false}
-                            onChange={() => console.log('on change')} />
+                            id={'radio-' + answer.option} defaultChecked={false}
+                             />
                         <label
-                            className="form-check-label"
+                            className="form-check-label hand"
                             htmlFor={'radio-' + answer.option}>{answer.option} - {answer.title}
                         </label>
                     </li>
                 ))}
             </ul>
+            <br />
+            <div className="d-grid gap-2">
+                <button type='button' className='btn btn-lg btn-primary' onClick={() => console.log('Next')}>
+                    Next question
+                </button>
+            </div>
         </div>
     );
 }
