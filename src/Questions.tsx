@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+
+import axios from 'axios';
+
 import { Question, Answer } from './models'
+
 import './Questions.scss'
 
 function Questions() {
@@ -8,13 +12,14 @@ function Questions() {
     const [currentQuestionAnswers, setCurrentQuestionAnswers] = useState<Answer[]>([]);
   
     useEffect(() => {
-      fetch('/api/questions').then(res => res.json()).then(data => {
-        setQuestions(data);
-        fetch(`/api/questions/${data[0]?.id}`).then(res => res.json()).then(({answers}) => {
-            setCurrentQuestionAnswers(answers);
+        axios.get('/api/questions').then(({data}) => {
+            setQuestions(data);
+            const { id } = data[currentQuestion-1];
+            axios.get(`/api/questions/${id}`).then(({data}) => {
+            setCurrentQuestionAnswers(data.answers);
         });
       });
-    }, []);
+    }, [currentQuestion]);
     
     return (
         <div className="Questions container" data-testid='questions'>

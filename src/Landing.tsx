@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+
+import axios from 'axios';
+
 import './Landing.scss';
 
 function Landing() {
@@ -8,8 +11,8 @@ function Landing() {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    fetch('/api/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
+    axios.get('/api/time').then(response => {
+      setCurrentTime(response.data.time);
     });
   }, []);
 
