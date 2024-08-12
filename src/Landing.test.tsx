@@ -1,13 +1,33 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter as Router } from "react-router-dom";
+import { fireEvent, render, screen } from '@testing-library/react';
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import Landing from './Landing';
+import Questions from './Questions';
 
-test('Should render [Start Personality Test] button', () => {
-  render(
-    <Router>
-      <Landing />
-    </Router>
-    );
-  const linkElement = screen.getByText(/start personality test/i);
-  expect(linkElement).toBeInTheDocument();
+describe('Landing screen', () => {
+  const router = createMemoryRouter([
+    {
+      path: "/",
+      element: <Landing />
+    },
+    {
+      path: "/questions",
+      element: <Questions />
+    }
+  ], { initialEntries: ['/']});
+
+  test('should render start button', () => {
+    render(<RouterProvider router={router} />);
+
+    const linkElement = screen.getByText(/start personality test/i);
+    
+    expect(linkElement).toBeInTheDocument();
+  });
+  
+  test("should navigate to questions screen", () => {
+    render(<RouterProvider router={router} />);
+  
+    fireEvent.click(screen.getByText(/start personality test/i));
+  
+    expect(screen.getByTestId('questions')).toBeInTheDocument();
+  });
 });
