@@ -14,8 +14,8 @@ function Landing() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="Landing container">
+      <header>
         <button type='button' className='btn btn-primary' onClick={() => navigate('/questions')}>
           Start Personality Test
         </button>
