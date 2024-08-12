@@ -8,7 +8,7 @@ import axios from 'axios';
 import Landing from '../../screens/Landing';
 import Questions from '../../screens/Questions';
 
-import { mockQuestionAnswers, mockQuestions } from '../../__mocks__/questions';
+import { mockQuestionAnswers1, mockQuestions } from '../../__mocks__';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -56,7 +56,7 @@ describe('Landing screen', () => {
   
   test("should navigate to questions screen", async () => {
     mockedAxios.get.mockResolvedValueOnce({data: mockQuestions});
-    mockedAxios.get.mockResolvedValueOnce({data: mockQuestionAnswers});
+    mockedAxios.get.mockResolvedValueOnce({data: mockQuestionAnswers1});
 
     render(<RouterProvider router={router} />);
     
