@@ -30,4 +30,8 @@ def get_all_questions():
 @app.route('/api/questions/<int:question_id>')
 def get_question(question_id):
     # get question with the given id
-    return next((q for q in QUESTIONS if q['id'] == question_id), None) or {}, 404
+    question = next((q for q in QUESTIONS if q['id'] == question_id), None)
+    if question is None:
+        return {}, 404
+    else:
+        return question
