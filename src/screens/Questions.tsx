@@ -23,10 +23,11 @@ function Questions() {
     
     return (
         <div className="Questions container" data-testid='questions'>
-            <h1>Question {currentQuestion} of {questions.length}</h1>
-            <h4>
+            <p className='italic'>Question {currentQuestion} of {questions.length}</p>
+            <h3>
                 {questions[currentQuestion-1]?.title}
-            </h4>
+            </h3>
+            <p className='italic'>All questions are required</p>
             <ul className='list-group'>
                 {currentQuestionAnswers.map(answer => (
                     <li className='list-group-item' key={answer.option}>
