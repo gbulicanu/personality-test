@@ -30,8 +30,17 @@ function Questions() {
             <ul className='list-group'>
                 {currentQuestionAnswers.map(answer => (
                     <li className='list-group-item' key={answer.option}>
-                        <input className="form-check-input me-1" type="radio" name="listGroupRadio" value="" id={'radio-' + answer.option} checked={false} />
-                        <label className="form-check-label" htmlFor={'radio-' + answer.option}>{answer.option} - {answer.title}</label>
+                        <input
+                            className="form-check-input me-1"
+                            type="radio"
+                            name="listGroupRadio"
+                            value=""
+                            id={'radio-' + answer.option} checked={false}
+                            onChange={() => console.log('on change')} />
+                        <label
+                            className="form-check-label"
+                            htmlFor={'radio-' + answer.option}>{answer.option} - {answer.title}
+                        </label>
                     </li>
                 ))}
             </ul>

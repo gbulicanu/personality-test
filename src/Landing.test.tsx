@@ -1,12 +1,21 @@
-import { describe, test} from '@jest/globals';
+import { describe, test } from '@jest/globals';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
+
+import axios from 'axios';
 
 import Landing from './Landing';
 import Questions from './Questions';
 
+import { mockQuestionAnswers, mockQuestions } from './__mocks__/questions';
+
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+
 describe('Landing screen', () => {
+  const time = 1723459384.318743;
+
   const router = createMemoryRouter([
     {
       path: "/",
@@ -18,19 +27,42 @@ describe('Landing screen', () => {
     }
   ], { initialEntries: ['/']});
 
-  test('should render start button', () => {
+  beforeEach(() => {
+    mockedAxios.get.mockResolvedValueOnce({data: {time}});
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('should render start button', async () => {
     render(<RouterProvider router={router} />);
 
-    const linkElement = screen.getByText(/start personality test/i);
+    await waitFor(() => {
+      const button = screen.getByText(/start personality test/i);
     
-    expect(linkElement).toBeInTheDocument();
+      expect(button).toBeInTheDocument();
+    });
+  });
+
+  test('should render time', async () => {
+    render(<RouterProvider router={router} />);
+
+    await waitFor(() => {
+      const timeParagraph = screen.getByText(/13:43:04/i, { exact: false });
+      expect(timeParagraph).toBeInTheDocument();
+    });
   });
   
-  test("should navigate to questions screen", () => {
+  test("should navigate to questions screen", async () => {
+    mockedAxios.get.mockResolvedValueOnce({data: mockQuestions});
+    mockedAxios.get.mockResolvedValueOnce({data: mockQuestionAnswers});
+
     render(<RouterProvider router={router} />);
-  
-    fireEvent.click(screen.getByText(/start personality test/i));
-  
-    expect(screen.getByTestId('questions')).toBeInTheDocument();
+    
+    await waitFor(() => {
+      fireEvent.click(screen.getByText(/start personality test/i));
+      expect(screen.getByTestId('questions')).toBeInTheDocument();
+    });
   });
 });
