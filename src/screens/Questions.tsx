@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
-import { Question, Answer } from './models'
+import { Question, Answer } from '../models'
 
 import './Questions.scss'
 

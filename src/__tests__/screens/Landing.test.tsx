@@ -5,10 +5,10 @@ import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
 import axios from 'axios';
 
-import Landing from './Landing';
-import Questions from './Questions';
+import Landing from '../../screens/Landing';
+import Questions from '../../screens/Questions';
 
-import { mockQuestionAnswers, mockQuestions } from './__mocks__/questions';
+import { mockQuestionAnswers, mockQuestions } from '../../__mocks__/questions';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;

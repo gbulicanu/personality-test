@@ -3,10 +3,10 @@ import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
 import axios from 'axios';
 
-import Questions from './Questions';
-import Finish from './Finish';
+import Questions from '../../screens/Questions';
+import Finish from '../../screens/Finish';
 
-import { mockQuestionAnswers, mockQuestions } from './__mocks__/questions';
+import { mockQuestionAnswers, mockQuestions } from '../../__mocks__/questions';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -28,7 +28,7 @@ describe('Questions screen', () => {
     mockedAxios.get.mockResolvedValueOnce({data: mockQuestionAnswers});
 
     render(<RouterProvider router={router} />);
-    
+
     await waitFor(() => {
         const heading = screen.getByText(/Question 1 of 3/i);
         expect(heading).toBeInTheDocument();

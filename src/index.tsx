@@ -12,9 +12,9 @@ import './bootstrap.scss';
 // components takes precedence over default styles.
 import './index.scss';
 
-import Landing from './Landing';
-import Questions from './Questions';
-import Finish from './Finish';
+import Landing from './screens/Landing';
+import Questions from './screens/Questions';
+import Finish from './screens/Finish';
 
 import reportWebVitals from './reportWebVitals';
 
