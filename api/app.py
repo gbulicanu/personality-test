@@ -1,7 +1,8 @@
 import time
-from flask import Flask
+from flask import Flask, request
 
 from questions import QUESTIONS
+from personality import INTROVERT, EXTROVERT
 
 app = Flask(__name__, static_folder='../build', static_url_path='/')
 
@@ -34,4 +35,27 @@ def get_question(question_id):
     if question is None:
         return {}, 404
     else:
-        return question
+        question_view = { 'answers': [] }
+        for q in question['answers']:
+            question_view['answers'].append({'option': q['option'], 'title': q['title']})
+        return question_view
+    
+@app.route('/api/answers', methods=['POST'])
+def calculate_trait():
+    i, e = 0, 0
+    answers = request.get_json()
+    print(answers)
+    print(answers[1])
+    for answer in answers:
+        question = next((q for q in QUESTIONS if q['id'] == answer['id']))
+        answer_scores = next((a for a in question['answers'] if a['option'] == answer['answerOption']))
+        i += answer_scores['i']
+        e += answer_scores['e']
+    print(i, e)
+    if i > e:
+        return INTROVERT, 200
+    elif i < e:
+        return EXTROVERT, 200
+    else:
+        # TODO provide ambivert trait
+        return EXTROVERT, 200
