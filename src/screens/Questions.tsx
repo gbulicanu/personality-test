@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import axios from 'axios';
 
@@ -7,6 +8,8 @@ import { Answer, Question, QuestionAnswer } from '../models'
 import './Questions.scss'
 
 function Questions() {
+    const navigate = useNavigate();
+
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [questionAnswers, setQuestionAnswers] = useState<QuestionAnswer[]>([]);
@@ -71,6 +74,13 @@ function Questions() {
         return currentQuestion !== 1;
     }
 
+    const finish = () => {
+        axios.post(`/api/answers`, questionAnswers).then(({data}) => {
+            localStorage.setItem('personality-trait', JSON.stringify(data));
+            navigate('/finish')
+        });
+    }
+
     return (
         <div className="Questions container" data-testid='questions'>
             <p className='italic'>Question {currentQuestion} of {questions.length}</p>
@@ -123,7 +133,7 @@ function Questions() {
                         type='button'
                         disabled={shouldDisableNext()}
                         className='btn btn-lg btn-primary'
-                        onClick={() => console.log('Finishing test')}
+                        onClick={finish}
                         data-testid='finish-button'>
                         Finish test
                     </button>

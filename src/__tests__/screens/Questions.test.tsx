@@ -6,7 +6,12 @@ import axios from 'axios';
 import Questions from '../../screens/Questions';
 import Finish from '../../screens/Finish';
 
-import { mockQuestionAnswers1, mockQuestionAnswers2, mockQuestions } from '../../__mocks__';
+import { 
+  mockQuestionAnswers1,
+  mockQuestionAnswers2,
+  mockQuestions,
+  mockTraitIntrovert
+} from '../../__mocks__';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -144,6 +149,35 @@ describe('Questions screen', () => {
       fireEvent.click(firstQuestionRadio);
   
       expect(finishButton).toBeEnabled();
+    });
+  });
+
+  test('should be able to post question answers', async () => {
+    render(<RouterProvider router={router} />);
+
+    await waitFor(() => screen.getByTestId('next-button'));
+
+    const nextButton = screen.getByTestId('next-button');
+    const firstQuestionRadio = screen.getByTestId('question-A');
+
+    fireEvent.click(firstQuestionRadio);
+    mockedAxios.get.mockResolvedValueOnce({data: mockQuestionAnswers1});
+    fireEvent.click(nextButton);
+
+    fireEvent.click(firstQuestionRadio);
+    mockedAxios.get.mockResolvedValueOnce({data: mockQuestionAnswers2});
+    fireEvent.click(nextButton);
+    
+    
+    await waitFor(() => screen.getByTestId('finish-button'));
+    const finishButton = screen.getByTestId('finish-button');
+
+    await waitFor(() => {
+      fireEvent.click(firstQuestionRadio);
+      mockedAxios.post.mockResolvedValueOnce({data: mockTraitIntrovert});
+      fireEvent.click(finishButton);
+      expect(screen.getByTestId('retake-button')).toBeInTheDocument();
+      expect(localStorage.getItem('personality-trait')).toEqual(JSON.stringify(mockTraitIntrovert))
     });
   });
 });
