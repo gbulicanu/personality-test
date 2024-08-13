@@ -1,27 +1,40 @@
-# Getting Started with Create React App
+# Getting Started with Personality Test App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The frontend project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and backend exists
+in api folder and it implemented in Python with flask within pipenv based virtual environment.
+
+## Prerequisites
+
+* Node.js latest LTS
+* Python 3.x
+* pip install pipenv
 
 ## Available Scripts
 
 In the project directory, you can run:
 
+### `npm start-api`
+
+Runs the backend api in the development mode.\
+Play with [http://127.0.0.1:5000](http://127.0.0.1:5000) in Postman or curl it.
+
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Runs the frontend app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.\
+The flask backend api will be proxy'd under [http://localhost:3000/api](http://localhost:3000/api)
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+Launches frontend test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds frontend app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
