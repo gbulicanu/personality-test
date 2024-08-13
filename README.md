@@ -27,6 +27,11 @@ The flask backend api will be proxy'd under [http://localhost:3000/api](http://l
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+### `npm test-api`
+
+Launches backend test runner.\
+See the section about [running pytest tests](hhttps://docs.pytest.org/en/7.1.x/how-to/usage.html) for more information.
+
 ### `npm test`
 
 Launches frontend test runner in the interactive watch mode.\

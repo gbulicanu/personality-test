@@ -21,6 +21,7 @@
     "start-api": "cd api && pipenv run flask --no-debug run",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
+    "test-api": "cd api && pipenv run pytest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
